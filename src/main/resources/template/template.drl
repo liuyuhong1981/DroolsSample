@@ -1,0 +1,22 @@
+template header
+
+message
+status
+
+package org.lyh.sample;
+
+import org.lyh.sample.test.DroolsTest.Message;
+
+template "template"
+
+rule "Hello World"
+    when
+    	m : Message( status == Message.HELLO, myMessage : message )
+    then
+        System.out.println( myMessage );
+        m.setMessage( "Goodbye cruel world 2" );
+        m.setStatus( Message.GOODBYE );
+        update( m );
+end
+
+end template
