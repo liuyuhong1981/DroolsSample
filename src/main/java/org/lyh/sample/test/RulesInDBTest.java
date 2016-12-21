@@ -3,7 +3,6 @@
  */
 package org.lyh.sample.test;
 
-import org.kie.api.KieBase;
 import org.kie.api.KieServices;
 import org.kie.api.builder.KieBuilder;
 import org.kie.api.builder.KieFileSystem;
@@ -33,24 +32,24 @@ public class RulesInDBTest {
 		// read and build the drl string
 		StringBuffer sb = new StringBuffer();
 		sb.append("package org.lyh.sample\n");
+		sb.append("import org.lyh.sample.test.DroolsTest.Message;\n");
 
-		sb.append("import org.lyh.sample.DroolsTest.Message;\n");
 		sb.append("rule \"Hello World\"\n");
 		sb.append("when\n");
 		sb.append("m : Message( status == Message.HELLO, myMessage : message )\n");
 		sb.append("then\n");
-		sb.append("System.out.println( myMessage );\n");
-		sb.append("m.setMessage( \"Goodbye cruel world\" );\n");
-		sb.append("m.setStatus( Message.GOODBYE );\n");
-		sb.append("update( m );\n");
+		sb.append("System.out.println( \"111\" );\n");
+		//sb.append("m.setMessage( \"Goodbye cruel world\" );\n");
+		//sb.append("m.setStatus( Message.GOODBYE );\n");
+		//sb.append("update( m );\n");
 		sb.append("end\n");
 
-		sb.append("rule \"GoodBye\"\n");
-		sb.append("when\n");
-		sb.append("Message( status == Message.GOODBYE, myMessage : message )\n");
-		sb.append("then\n");
-		sb.append("System.out.println( myMessage );\n");
-		sb.append("end\n");
+//		sb.append("rule \"GoodBye\"\n");
+//		sb.append("when\n");
+//		sb.append("Message( status == Message.GOODBYE, myMessage : message )\n");
+//		sb.append("then\n");
+//		sb.append("System.out.println( myMessage );\n");
+//		sb.append("end\n");
 		
 		System.out.println(sb.toString());
 
@@ -68,11 +67,11 @@ public class RulesInDBTest {
 		KieSession kieSession = kieContainer.newKieSession();
 
 		try {
-			Message message = new Message();
-			message.setMessage("Hello World");
-			message.setStatus(Message.HELLO);
+			Message m = new Message();
+			m.setMessage("Hello World");
+			m.setStatus(Message.HELLO);
 
-			kieSession.insert(message);
+			kieSession.insert(m);
 			kieSession.fireAllRules();
 		} catch (Throwable t) {
 			t.printStackTrace();

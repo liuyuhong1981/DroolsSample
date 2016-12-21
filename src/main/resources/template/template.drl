@@ -19,4 +19,11 @@ rule "Hello World"
         update( m );
 end
 
+rule "GoodBye"
+    when
+        Message( status == Message.GOODBYE, myMessage : message )
+    then
+        System.out.println( myMessage );
+end
+
 end template

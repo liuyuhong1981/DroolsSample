@@ -1,0 +1,19 @@
+template header
+
+ruleId
+factType
+whenStatement
+thenStatement
+
+package org.lyh.sample;
+
+template "template2"
+
+rule "@{ruleId}"
+    when
+    	@{factType}@{whenStatement}
+    then
+        @{thenStatement}
+end
+
+end template
